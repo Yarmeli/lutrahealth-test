@@ -15,7 +15,7 @@ export const appointmentsRouter = {
 				notes: z.string().optional(),
 			}),
 		)
-		.query(async ({ input }) => {
+		.mutation(async ({ input }) => {
 			return db.insert(appointments).values({
 				patientId: input.patientId,
 				scheduledFor: input.scheduledFor,
