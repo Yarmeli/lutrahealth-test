@@ -23,7 +23,7 @@ const steps = [
 		title: "🚨 List patients and view details",
 		description:
 			"List out your patients on the home page, when selected, we should see their details.",
-		done: false,
+		done: true,
 	},
 	{
 		id: 5,
@@ -62,9 +62,9 @@ export default function Steps() {
 								>
 									<title>Completed</title>
 									<path d="M256 512A256 256 0 1 0 256 0a256 256 0 0 0 0 512z" />
-									<path 
-										fill="white" 
-										d="M369 209L241 337c-9 9-24 9-34 0l-56-56c-9-9-9-24 0-34 9-9 24-9 34 0l39 39 111-111c9-9 24-9 34 0 9 10 9 25 0 34z" 
+									<path
+										fill="white"
+										d="M369 209L241 337c-9 9-24 9-34 0l-56-56c-9-9-9-24 0-34 9-9 24-9 34 0l39 39 111-111c9-9 24-9 34 0 9 10 9 25 0 34z"
 									/>
 								</svg>
 							) : (
