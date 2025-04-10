@@ -6,12 +6,17 @@ import { index, pgEnum, pgTableCreator } from "drizzle-orm/pg-core";
  */
 export const createTable = pgTableCreator((name) => `lutra-tech-test_${name}`);
 
-export const appointmentStatusEnum = pgEnum("appointment_status", [
+export const appointmentStatus = [
 	"SCHEDULED",
 	"CONFIRMED",
 	"COMPLETED",
 	"CANCELLED",
-]);
+] as const;
+
+export const appointmentStatusEnum = pgEnum(
+	"appointment_status",
+	appointmentStatus,
+);
 
 // Patients table
 export const patients = createTable(
