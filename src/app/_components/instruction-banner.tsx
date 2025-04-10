@@ -9,24 +9,28 @@ const steps = [
 		id: 1,
 		title: "Get it running",
 		description: "Since you're reading this, well done 🎉",
+		done: true,
 	},
 	{
 		id: 2,
 		title: "Create and seed the database 🌱",
 		description:
 			"The repository contains nearly(!) everything you'll need to get one up and running. Try to only seed the patients table 🙂",
+		done: true,
 	},
 	{
 		id: 4,
 		title: "🚨 List patients and view details",
 		description:
 			"List out your patients on the home page, when selected, we should see their details.",
+		done: false,
 	},
 	{
 		id: 5,
 		title: "🚨 Add appointments to patients",
 		description:
 			"For each patient, we need to be able to create a new appointment, bonus points for displaying them all on the same page.",
+		done: false,
 	},
 ];
 
@@ -45,19 +49,39 @@ export default function Steps() {
 					</div>
 					<div className="flex items-start space-x-2.5">
 						<div className="relative flex size-6 flex-none items-center justify-center bg-gray-900 text-gray-500">
-							<svg
-								stroke="currentColor"
-								fill="currentColor"
-								strokeWidth="0"
-								className="size-3"
-								viewBox="0 0 512 512"
-								height="200px"
-								width="200px"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<title>Circle</title>
-								<path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z" />
-							</svg>
+							{step.done ? (
+								<svg
+									stroke="currentColor"
+									fill="currentColor"
+									strokeWidth="0"
+									className="size-3 text-green-500"
+									viewBox="0 0 512 512"
+									height="200px"
+									width="200px"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<title>Completed</title>
+									<path d="M256 512A256 256 0 1 0 256 0a256 256 0 0 0 0 512z" />
+									<path 
+										fill="white" 
+										d="M369 209L241 337c-9 9-24 9-34 0l-56-56c-9-9-9-24 0-34 9-9 24-9 34 0l39 39 111-111c9-9 24-9 34 0 9 10 9 25 0 34z" 
+									/>
+								</svg>
+							) : (
+								<svg
+									stroke="currentColor"
+									fill="currentColor"
+									strokeWidth="0"
+									className="size-3"
+									viewBox="0 0 512 512"
+									height="200px"
+									width="200px"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<title>Circle</title>
+									<path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z" />
+								</svg>
+							)}
 						</div>
 						<div>
 							<p className="font-medium text-gray-100">{step.title}</p>
