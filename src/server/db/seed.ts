@@ -15,7 +15,13 @@ async function main() {
 	console.log("Seeding database...");
 	try {
 		await reset(db, { patients });
-		await seed(db, { patients });
+		await seed(
+			db,
+			{ patients },
+			{
+				count: 100,
+			},
+		);
 	} catch (error) {
 		console.error("Error seeding database:", error);
 		process.exit(1);
