@@ -15,7 +15,7 @@ const conn =
 	globalForDb.conn ??
 	postgres(env.DATABASE_URL, {
 		max: 1,
-		ssl: env.NODE_ENV === "production",
+		// ssl: env.NODE_ENV === "production",
 	});
 
 if (env.NODE_ENV !== "production") globalForDb.conn = conn;
