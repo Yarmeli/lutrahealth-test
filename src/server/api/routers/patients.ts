@@ -17,4 +17,12 @@ export const patientsRouter = {
 			},
 		});
 	}),
+
+	getById: publicProcedure
+		.input(z.object({ id: z.number() }))
+		.query(async ({ input }) => {
+			return db.query.patients.findFirst({
+				where: eq(patients.id, input.id),
+			});
+		}),
 } satisfies TRPCRouterRecord;
