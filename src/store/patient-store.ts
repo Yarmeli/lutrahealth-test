@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface PatientStore {
+export interface PatientStore {
 	selectedPatientId: number | null;
 	setSelectedPatientId: (id: number | null) => void;
 	dialogStage: "view" | "booking";

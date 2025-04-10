@@ -10,8 +10,8 @@ import {
 } from "@lutra/components/ui/table";
 import { usePatientStore } from "@lutra/store/patient-store";
 import { api } from "@lutra/trpc/react";
-import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Loading } from "./loading";
 
 function useDebounce<T>(value: T, delay: number): T {
 	const [debouncedValue, setDebouncedValue] = useState<T>(value);
@@ -135,9 +135,7 @@ export default function PatientData() {
 					{status === "pending" ? (
 						<TableRow>
 							<TableCell colSpan={3}>
-								<div className="flex h-full items-center justify-center">
-									<Loader2 className="size-4 animate-spin" />
-								</div>
+								<Loading />
 							</TableCell>
 						</TableRow>
 					) : null}

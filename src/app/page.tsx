@@ -1,6 +1,6 @@
+import { PatientDetailsDialog } from "./_components/dialog";
 import { InstructionBanner } from "./_components/instruction-banner";
 import PatientData from "./_components/patient";
-import { PatientDetailsDialog } from "./_components/patient-dialog";
 
 export default async function Home() {
 	return (

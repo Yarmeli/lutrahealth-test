@@ -4,12 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@lutra/components/ui/button";
 import { Calendar as CalendarComponent } from "@lutra/components/ui/calendar";
 import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-} from "@lutra/components/ui/dialog";
-import {
 	Form,
 	FormControl,
 	FormDescription,
@@ -28,11 +22,9 @@ import { ScrollArea, ScrollBar } from "@lutra/components/ui/scroll-area";
 import { Textarea } from "@lutra/components/ui/textarea";
 import { cn } from "@lutra/lib/utils";
 import type { AppRouter } from "@lutra/server/api/root";
-import { usePatientStore } from "@lutra/store/patient-store";
-import { api } from "@lutra/trpc/react";
 import type { inferProcedureOutput } from "@trpc/server";
 import { format } from "date-fns";
-import { ArrowLeft, Calendar, CalendarIcon, Loader2 } from "lucide-react";
+import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -44,28 +36,9 @@ const appointmentFormSchema = z.object({
 	notes: z.string().optional(),
 });
 
-type AppointmentFormValues = z.infer<typeof appointmentFormSchema>;
+export type AppointmentFormValues = z.infer<typeof appointmentFormSchema>;
 
-function PatientDetail({
-	label,
-	value,
-	isBlurred = false,
-}: { label: string; value?: string | null; isBlurred?: boolean }) {
-	return (
-		<div className="border-b p-4">
-			<h3 className="font-medium text-lg">{label}</h3>
-			<p
-				className={cn({
-					"blur-sm transition-all duration-300 hover:blur-none": isBlurred,
-				})}
-			>
-				{value || "-"}
-			</p>
-		</div>
-	);
-}
-
-function AppointmentList({
+export function AppointmentList({
 	appointments,
 }: {
 	appointments: inferProcedureOutput<
@@ -105,7 +78,7 @@ function AppointmentList({
 	);
 }
 
-function AppointmentForm({
+export function AppointmentForm({
 	onSubmit,
 }: { onSubmit: (data: AppointmentFormValues) => void }) {
 	const form = useForm<AppointmentFormValues>({
@@ -303,140 +276,5 @@ function AppointmentForm({
 				</Button>
 			</form>
 		</Form>
-	);
-}
-
-export function PatientDetailsDialog() {
-	const {
-		selectedPatientId,
-		setSelectedPatientId,
-		dialogStage,
-		setDialogStage,
-	} = usePatientStore();
-
-	const { data: selectedPatient, isLoading } = api.patients.getById.useQuery(
-		{ id: selectedPatientId ?? 1 },
-		{ enabled: !!selectedPatientId },
-	);
-
-	const { data: appointments, refetch: refetchAppointments } =
-		api.appointments.getByPatientId.useQuery(
-			{ patientId: selectedPatientId ?? 1 },
-			{ enabled: !!selectedPatientId },
-		);
-
-	const createAppointment = api.appointments.create.useMutation({
-		onSuccess: () => {
-			refetchAppointments();
-		},
-	});
-
-	const handleCreateAppointment = (data: AppointmentFormValues) => {
-		if (!selectedPatientId) return;
-
-		createAppointment.mutate({
-			patientId: selectedPatientId,
-			scheduledFor: data.scheduledFor,
-			reason: data.reason,
-			notes: data.notes,
-		});
-	};
-
-	return (
-		<Dialog
-			open={!!selectedPatientId}
-			onOpenChange={() => {
-				setSelectedPatientId(null);
-				setDialogStage("view");
-			}}
-		>
-			<DialogContent className="max-w-2xl rounded-lg shadow-lg">
-				<DialogHeader>
-					<DialogTitle className="font-bold text-2xl">
-						{dialogStage === "view" ? "Patient Details" : "Manage Appointments"}
-					</DialogTitle>
-				</DialogHeader>
-				{isLoading ? (
-					<div className="flex h-full items-center justify-center">
-						<Loader2 className="size-4 animate-spin" />
-					</div>
-				) : null}
-				{selectedPatient && (
-					<div className="space-y-4">
-						{dialogStage === "view" ? (
-							<>
-								<PatientDetail
-									label="Name"
-									value={`${selectedPatient.firstName} ${selectedPatient.lastName}`}
-								/>
-								<PatientDetail
-									label="Email"
-									value={selectedPatient.email}
-									isBlurred={true}
-								/>
-								<PatientDetail
-									label="Status"
-									value={selectedPatient.isActive ? "Active" : "Inactive"}
-								/>
-								<PatientDetail
-									label="Date of Birth"
-									value={selectedPatient.dateOfBirth}
-									isBlurred={true}
-								/>
-								<PatientDetail
-									label="Created At"
-									value={selectedPatient.createdAt.toLocaleString()}
-								/>
-								<PatientDetail
-									label="Updated At"
-									value={selectedPatient.updatedAt?.toLocaleString()}
-								/>
-								<div className="flex justify-end pt-4">
-									<Button
-										onClick={() => setDialogStage("booking")}
-										className="flex items-center gap-2"
-									>
-										<Calendar className="size-4" />
-										Manage Appointments
-									</Button>
-								</div>
-							</>
-						) : (
-							<>
-								<div className="flex items-center gap-2 pb-4">
-									<Button
-										variant="ghost"
-										size="sm"
-										onClick={() => setDialogStage("view")}
-										className="gap-2"
-									>
-										<ArrowLeft className="size-4" />
-										Back to Patient Details
-									</Button>
-								</div>
-								<div className="space-y-6">
-									<div>
-										<h3 className="mb-4 font-medium text-lg">
-											Existing Appointments
-										</h3>
-										{appointments && appointments.length > 0 ? (
-											<AppointmentList appointments={appointments} />
-										) : (
-											<p className="text-gray-500">No appointments scheduled</p>
-										)}
-									</div>
-									<div>
-										<h3 className="mb-4 font-medium text-lg">
-											Schedule New Appointment
-										</h3>
-										<AppointmentForm onSubmit={handleCreateAppointment} />
-									</div>
-								</div>
-							</>
-						)}
-					</div>
-				)}
-			</DialogContent>
-		</Dialog>
 	);
 }
