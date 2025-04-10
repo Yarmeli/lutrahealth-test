@@ -9,7 +9,6 @@ import {
 } from "@lutra/components/ui/table";
 import { usePatientStore } from "@lutra/store/patient-store";
 import { api } from "@lutra/trpc/react";
-import { PatientDetailsDialog } from "./patient-dialog";
 
 export default function PatientData() {
 	const { setSelectedPatientId } = usePatientStore();
