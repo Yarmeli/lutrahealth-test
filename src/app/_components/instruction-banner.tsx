@@ -30,7 +30,7 @@ const steps = [
 		title: "🚨 Add appointments to patients",
 		description:
 			"For each patient, we need to be able to create a new appointment, bonus points for displaying them all on the same page.",
-		done: false,
+		done: true,
 	},
 ];
 
