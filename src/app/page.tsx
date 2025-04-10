@@ -21,10 +21,10 @@ export default async function Home() {
 							{[0].map((item) => (
 								<div
 									key={item}
-									className="group relative rounded border border-gray-200 bg-white p-2"
+									className="group relative rounded border border-gray-200 bg-gray-900 p-2"
 								>
 									<div className="h-20">
-										<div className="relative h-full overflow-hidden rounded bg-gray-50">
+										<div className="relative h-full overflow-hidden rounded bg-gray-900">
 											<svg
 												className="absolute inset-0 h-full w-full stroke-blue-100"
 												fill="none"
@@ -54,13 +54,13 @@ export default async function Home() {
 									<h3 className="mt-2 font-semibold">
 										<a
 											href="/#"
-											className="focus:outline-none group-hover:text-blue-600"
+											className="focus:outline-none group-hover:text-blue-400"
 										>
 											<span className="absolute inset-0" aria-hidden={true} />
 											Placeholder Text
 										</a>
 									</h3>
-									<p className="text-gray-600">Placeholder description</p>
+									<p className="text-gray-400">Placeholder description</p>
 								</div>
 							))}
 						</div>

@@ -41,10 +41,10 @@ export default function Steps() {
 							"absolute top-0 left-0 flex w-6 justify-center",
 						)}
 					>
-						<span className="w-px bg-gray-200" aria-hidden={true} />
+						<span className="w-px bg-gray-700" aria-hidden={true} />
 					</div>
 					<div className="flex items-start space-x-2.5">
-						<div className="relative flex size-6 flex-none items-center justify-center bg-white text-gray-500">
+						<div className="relative flex size-6 flex-none items-center justify-center bg-gray-900 text-gray-500">
 							<svg
 								stroke="currentColor"
 								fill="currentColor"
@@ -60,8 +60,8 @@ export default function Steps() {
 							</svg>
 						</div>
 						<div>
-							<p className="font-medium text-gray-700">{step.title}</p>
-							<p className="mt-0.5 text-gray-600">{step.description}</p>
+							<p className="font-medium text-gray-100">{step.title}</p>
+							<p className="mt-0.5 text-gray-400">{step.description}</p>
 						</div>
 					</div>
 				</li>
@@ -73,7 +73,7 @@ export default function Steps() {
 function InstructionBanner() {
 	return (
 		<>
-			<div className="relative rounded-lg border border-gray-200 bg-white p-4">
+			<div className="relative rounded-lg border border-gray-700 bg-gray-900 p-4">
 				<div className="flex flex-col items-center gap-6 md:flex-row md:gap-12">
 					<div className="flex max-w-lg flex-col gap-2">
 						<h3 className="font-semibold">Lutra Health Technical Assessment</h3>
