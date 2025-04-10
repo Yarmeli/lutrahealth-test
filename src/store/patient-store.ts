@@ -1,11 +1,15 @@
 import { create } from "zustand";
 
 interface PatientStore {
-  selectedPatientId: number | null;
-  setSelectedPatientId: (id: number | null) => void;
+	selectedPatientId: number | null;
+	setSelectedPatientId: (id: number | null) => void;
+	dialogStage: "view" | "booking";
+	setDialogStage: (stage: "view" | "booking") => void;
 }
 
 export const usePatientStore = create<PatientStore>((set) => ({
-  selectedPatientId: null,
-  setSelectedPatientId: (id) => set({ selectedPatientId: id }),
-})); 
+	selectedPatientId: null,
+	dialogStage: "view",
+	setSelectedPatientId: (id) => set({ selectedPatientId: id }),
+	setDialogStage: (stage) => set({ dialogStage: stage }),
+}));
