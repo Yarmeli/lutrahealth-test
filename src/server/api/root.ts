@@ -1,5 +1,4 @@
 import { createCallerFactory, createTRPCRouter } from "@lutra/server/api/trpc";
-import { helloRouter } from "./routers/hello";
 import { patientsRouter } from "./routers/patients";
 /**
  * This is the primary router for your server.
@@ -7,7 +6,6 @@ import { patientsRouter } from "./routers/patients";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-	hello: helloRouter,
 	patients: patientsRouter,
 });
 
